@@ -6,7 +6,10 @@ Projeto com o objetivo de estudar clean architecture.
 
 Projeto CRUD para adicionar contas fixas e contas variaveis no mes, com visualização do saldo devedor do mes vigente.
 
--- imagens
+<div style="display: inline_block"><br>
+  <img align="center" alt="eye_open" height="30" width="50" src="images/dashboard_aberto.jpeg">
+  <img align="center" alt="eye_close" height="30" width="50" src="images/dashboard_fechada.jpeg.jpeg">
+</div>
 
 ## Desenvolvimento 
 - [x] Dashboard.
