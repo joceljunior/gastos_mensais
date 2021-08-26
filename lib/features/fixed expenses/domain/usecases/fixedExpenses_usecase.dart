@@ -12,6 +12,7 @@ abstract class IFixedExpensesUseCase {
       FixedExpense fixed);
   Future<Either<FixedExpensesError, List<FixedExpense>>> listFixedExpense();
   Future<Either<FixedExpensesError, bool>> pay(FixedExpense fixed);
+  Future<Either<FixedExpensesError, bool>> deleteExpense(int id);
 }
 
 class FixedExpensesUseCase implements IFixedExpensesUseCase {
@@ -34,5 +35,10 @@ class FixedExpensesUseCase implements IFixedExpensesUseCase {
   Future<Either<FixedExpensesError, bool>> pay(FixedExpense fixed) async {
     fixed.pay = 1;
     return await repository.pay(fixed);
+  }
+
+  @override
+  Future<Either<FixedExpensesError, bool>> deleteExpense(int id) async {
+    return await repository.deleteExpense(id);
   }
 }

@@ -7,7 +7,7 @@ Future<Database> getDatabase() async {
   return openDatabase(
     path,
     onCreate: _createDatabase,
-    version: 5,
+    version: 6,
   );
 }
 

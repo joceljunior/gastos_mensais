@@ -71,4 +71,14 @@ class FixedExpensesRepository implements IFixedExpensesRepository {
       return Left(DatasourceError(message: 'Erro no datasource'));
     }
   }
+
+  @override
+  Future<Either<FixedExpensesError, bool>> deleteExpense(int id) async {
+    try {
+      final result = await datasource.deleteExpense(id);
+      return Right(result);
+    } on DatasourceError {
+      return Left(DatasourceError(message: 'Erro no datasource'));
+    }
+  }
 }

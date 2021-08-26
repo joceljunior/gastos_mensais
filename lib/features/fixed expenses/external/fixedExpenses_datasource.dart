@@ -41,4 +41,15 @@ class FixedExpensesDatasource implements IFixedExpensesDatasource {
               return success;
             }));
   }
+
+  @override
+  Future<bool> deleteExpense(int id) async {
+    return await tableFixedExpenses
+        .delete(id)
+        .then((value) => value.fold((failure) {
+              throw DatasourceError(message: 'Erro no datasource');
+            }, (success) {
+              return success;
+            }));
+  }
 }

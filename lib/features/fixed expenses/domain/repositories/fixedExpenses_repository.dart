@@ -9,4 +9,5 @@ abstract class IFixedExpensesRepository {
       FixedExpense fixed);
   Future<Either<FixedExpensesError, List<FixedExpense>>> listFixedExpense();
   Future<Either<FixedExpensesError, bool>> pay(FixedExpense fixed);
+  Future<Either<FixedExpensesError, bool>> deleteExpense(int id);
 }

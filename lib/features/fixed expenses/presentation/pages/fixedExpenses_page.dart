@@ -75,90 +75,90 @@ class _FixedExpensesPageState extends State<FixedExpensesPage> {
                 itemBuilder: (context, index) {
                   final FixedExpense model = expenses[index];
 
-                  if (model.id == 5) {
-                    print(model.id.toString());
-                    print(model.name.toString());
-                    print(model.description.toString());
-                    print(model.month.toString());
-                    print(model.value.toString());
-                    print(model.pay.toString());
-                  }
-                  return Padding(
-                    padding: const EdgeInsets.only(
-                        left: 20, right: 20, top: 10, bottom: 10),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.all(Radius.circular(30)),
-                      child: Card(
-                        elevation: 10.0,
-                        child: ListTile(
-                          tileColor: model.pay != 1
-                              ? Color(0xff0D8F6CE)
-                              : Color(0xff00ff5f),
-                          title: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(model.name),
-                                Text(
-                                  "R\$ " + model.value.toString(),
-                                  style: TextStyle(
-                                      color: Colors.red,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            ),
-                          ),
-                          subtitle: Row(
+                  return Container(
+                    margin: const EdgeInsets.all(12),
+                    padding: const EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Color(0xff00ff5f))),
+                    child: Card(
+                      elevation: 10.0,
+                      child: ListTile(
+                        tileColor: model.pay != 1
+                            ? Colors.white70
+                            : Color(0xff0D8F6CE),
+                        title: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(model.description),
+                              Text(
+                                model.name,
+                                style: TextStyle(fontWeight: FontWeight.bold),
                               ),
-                              Row(
-                                children: [
-                                  Container(
-                                    height: 70,
-                                    width: 0.3,
-                                    color: Colors.black,
-                                  ),
-                                  SizedBox(
-                                    width: 20,
-                                  ),
-                                  Container(
-                                    height: 50,
-                                    width: 40,
-                                    child: FloatingActionButton(
-                                      backgroundColor: Colors.green,
-                                      onPressed: () async {
-                                        //model.pay = 1;
-                                        await payFixedExpense(model);
-                                        setState(() {});
-                                      },
-                                      child: Icon(
-                                        Icons.payment,
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 18,
-                                  ),
-                                  Container(
-                                    height: 50,
-                                    width: 40,
-                                    child: FloatingActionButton(
-                                      backgroundColor: Colors.red,
-                                      onPressed: () {
-                                        //  widget.deleteItem();
-                                      },
-                                      child: Icon(Icons.delete),
-                                    ),
-                                  ),
-                                ],
-                              )
+                              model.pay != 1
+                                  ? Text(
+                                      "R\$ " + model.value.toString(),
+                                      style: TextStyle(
+                                          color: Colors.red,
+                                          fontWeight: FontWeight.bold),
+                                    )
+                                  : itempay(),
                             ],
                           ),
+                        ),
+                        subtitle: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                model.description,
+                                style: TextStyle(fontStyle: FontStyle.italic),
+                              ),
+                            ),
+                            Row(
+                              children: [
+                                Container(
+                                  height: 70,
+                                  width: 0.3,
+                                  color: Colors.black,
+                                ),
+                                SizedBox(
+                                  width: 20,
+                                ),
+                                Container(
+                                  height: 50,
+                                  width: 40,
+                                  child: FloatingActionButton(
+                                    backgroundColor: Colors.green,
+                                    onPressed: () async {
+                                      //model.pay = 1;
+                                      await payFixedExpense(model);
+                                      setState(() {});
+                                    },
+                                    child: Icon(
+                                      Icons.payment,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 18,
+                                ),
+                                Container(
+                                  height: 50,
+                                  width: 40,
+                                  child: FloatingActionButton(
+                                    backgroundColor: Colors.red,
+                                    onPressed: () async {
+                                      await delete(model.id!);
+                                      setState(() {});
+                                    },
+                                    child: Icon(Icons.delete),
+                                  ),
+                                ),
+                              ],
+                            )
+                          ],
                         ),
                       ),
                     ),
@@ -185,5 +185,22 @@ class _FixedExpensesPageState extends State<FixedExpensesPage> {
         }, (success) {
           return success;
         }));
+  }
+
+  Future<bool> delete(int id) async {
+    return await useCase
+        .deleteExpense(id)
+        .then((value) => value.fold((failure) {
+              return false;
+            }, (success) {
+              return success;
+            }));
+  }
+
+  Widget itempay() {
+    return Text(
+      "PAGO",
+      style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
+    );
   }
 }
