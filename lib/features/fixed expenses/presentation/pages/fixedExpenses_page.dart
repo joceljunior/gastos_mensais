@@ -3,8 +3,9 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 import 'package:gastos_mensais/core/widgets/form_expenses_widget.dart';
 
-import 'package:gastos_mensais/features/Fixed%20Expenses/domain/usecases/fixedExpenses_usecase.dart';
 import 'package:gastos_mensais/features/fixed%20expenses/domain/entities/fixed_expenses.dart';
+import 'package:gastos_mensais/features/fixed%20expenses/domain/usecases/fixed_expenses_usecase.dart';
+import 'package:gastos_mensais/features/fixed%20expenses/presentation/widgets/card_item_expense_widget.dart';
 
 class FixedExpensesPage extends StatefulWidget {
   FixedExpensesPage({
@@ -74,94 +75,12 @@ class _FixedExpensesPageState extends State<FixedExpensesPage> {
                 itemCount: expenses.length,
                 itemBuilder: (context, index) {
                   final FixedExpense model = expenses[index];
-
-                  return Container(
-                    margin: const EdgeInsets.all(12),
-                    padding: const EdgeInsets.all(5),
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Color(0xff00ff5f))),
-                    child: Card(
-                      elevation: 10.0,
-                      child: ListTile(
-                        tileColor: model.pay != 1
-                            ? Colors.white70
-                            : Color(0xff0D8F6CE),
-                        title: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                model.name,
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              ),
-                              model.pay != 1
-                                  ? Text(
-                                      "R\$ " + model.value.toString(),
-                                      style: TextStyle(
-                                          color: Colors.red,
-                                          fontWeight: FontWeight.bold),
-                                    )
-                                  : itempay(),
-                            ],
-                          ),
-                        ),
-                        subtitle: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                model.description,
-                                style: TextStyle(fontStyle: FontStyle.italic),
-                              ),
-                            ),
-                            Row(
-                              children: [
-                                Container(
-                                  height: 70,
-                                  width: 0.3,
-                                  color: Colors.black,
-                                ),
-                                SizedBox(
-                                  width: 20,
-                                ),
-                                Container(
-                                  height: 50,
-                                  width: 40,
-                                  child: FloatingActionButton(
-                                    backgroundColor: Colors.green,
-                                    onPressed: () async {
-                                      //model.pay = 1;
-                                      await payFixedExpense(model);
-                                      setState(() {});
-                                    },
-                                    child: Icon(
-                                      Icons.payment,
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 18,
-                                ),
-                                Container(
-                                  height: 50,
-                                  width: 40,
-                                  child: FloatingActionButton(
-                                    backgroundColor: Colors.red,
-                                    onPressed: () async {
-                                      await delete(model.id!);
-                                      setState(() {});
-                                    },
-                                    child: Icon(Icons.delete),
-                                  ),
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
+                  return CardItemWidget(
+                    model: model,
+                    delete: () async {
+                      await delete(model.id!);
+                      setState(() {});
+                    },
                   );
                 },
               );
@@ -195,12 +114,5 @@ class _FixedExpensesPageState extends State<FixedExpensesPage> {
             }, (success) {
               return success;
             }));
-  }
-
-  Widget itempay() {
-    return Text(
-      "PAGO",
-      style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
-    );
   }
 }

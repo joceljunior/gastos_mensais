@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import 'package:gastos_mensais/features/Fixed%20Expenses/domain/usecases/fixedExpenses_usecase.dart';
 import 'package:gastos_mensais/features/fixed%20expenses/domain/entities/fixed_expenses.dart';
+import 'package:gastos_mensais/features/fixed%20expenses/domain/usecases/fixed_expenses_usecase.dart';
 
 import 'text_form_field_widget.dart';
 
