@@ -75,9 +75,7 @@ class _FormExpensesState extends State<FormExpenses> {
                 color: Colors.black,
               ),
               onPressed: () {
-                widget.isFixed
-                    ? createFixedExpense(context)
-                    : print('variable');
+                widget.isFixed ? createFixedExpense() : print('variable');
               },
             ),
             FloatingActionButton(
@@ -96,8 +94,7 @@ class _FormExpensesState extends State<FormExpenses> {
     );
   }
 
-  void createFixedExpense(BuildContext context) {
-    IFixedExpensesUseCase usecase = Modular.get<IFixedExpensesUseCase>();
+  createFixedExpense() {
     var model = FixedExpense(
         name: nameController.text,
         description: descriptionController.text,
@@ -105,26 +102,25 @@ class _FormExpensesState extends State<FormExpenses> {
         pay: 0,
         month: 'Fixas');
 
-    //Modular.get<FixedExpensesUseCase>().createFixedExpense(model);
-    usecase.createFixedExpense(model).then(
+    Modular.get<FixedExpensesUseCase>().createFixedExpense(model).then(
           (result) => result.fold(
-            (l) => null,
+            (l) => false,
             (r) {
               nameController.clear();
               descriptionController.clear();
               valueController.clear();
-              Navigator.pop(context, 'Cancel');
+
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text('Despesa Fixa gravada!'),
                   backgroundColor: Colors.green,
                 ),
               );
+              return true;
             },
           ),
         );
 
-    Modular.to.pushNamed('/fixed', arguments: true);
     Navigator.pop(context, true);
   }
 }

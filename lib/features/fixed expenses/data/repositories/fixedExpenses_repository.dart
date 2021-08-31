@@ -81,4 +81,22 @@ class FixedExpensesRepository implements IFixedExpensesRepository {
       return Left(DatasourceError(message: 'Erro no datasource'));
     }
   }
+
+  @override
+  Future<Either<FixedExpensesError, bool>> cancelPay(FixedExpense fixed) async {
+    try {
+      var model = {
+        'id': fixed.id,
+        'name': fixed.name,
+        'description': fixed.description,
+        'value': fixed.value,
+        'month': fixed.month,
+        'pay': fixed.pay
+      };
+      final result = await datasource.pay(model);
+      return Right(result);
+    } on DatasourceError {
+      return Left(DatasourceError(message: 'Erro no datasource'));
+    }
+  }
 }

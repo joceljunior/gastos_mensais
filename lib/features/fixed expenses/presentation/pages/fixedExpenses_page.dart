@@ -81,6 +81,12 @@ class _FixedExpensesPageState extends State<FixedExpensesPage> {
                       await delete(model.id!);
                       setState(() {});
                     },
+                    payExpense: () async {
+                      await payFixedExpense(model);
+                    },
+                    cancelPayExpense: () async {
+                      await cancelPayFixedExpense(model);
+                    },
                   );
                 },
               );
@@ -93,13 +99,21 @@ class _FixedExpensesPageState extends State<FixedExpensesPage> {
   Future<bool?> showFormFixedExpenses(BuildContext context) async {
     await showDialog<bool>(
         context: context,
-        builder: (BuildContext context) => FormExpenses(
+        builder: (context) => FormExpenses(
               isFixed: true,
             ));
   }
 
   Future<bool> payFixedExpense(FixedExpense model) async {
     return await useCase.pay(model).then((value) => value.fold((failure) {
+          return false;
+        }, (success) {
+          return success;
+        }));
+  }
+
+  Future<bool> cancelPayFixedExpense(FixedExpense model) async {
+    return await useCase.cacelPay(model).then((value) => value.fold((failure) {
           return false;
         }, (success) {
           return success;

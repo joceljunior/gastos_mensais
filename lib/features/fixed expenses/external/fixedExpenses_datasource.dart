@@ -52,4 +52,15 @@ class FixedExpensesDatasource implements IFixedExpensesDatasource {
               return success;
             }));
   }
+
+  @override
+  Future<bool> cancelPay(Map<String, dynamic> fixed) async {
+    return await tableFixedExpenses
+        .payExpense(fixed)
+        .then((value) => value.fold((failure) {
+              throw DatasourceError(message: 'Erro no datasource');
+            }, (success) {
+              return success;
+            }));
+  }
 }
