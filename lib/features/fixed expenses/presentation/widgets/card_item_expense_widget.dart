@@ -109,13 +109,16 @@ class _CardItemWidgetState extends State<CardItemWidget> {
                         width: 40,
                         child: FloatingActionButton(
                           backgroundColor: Colors.red,
-                          onPressed: () {
-                            setState(() {
-                              isDelete = !isDelete;
-                            });
-                            Future.delayed(const Duration(seconds: 1), () {
-                              widget.delete();
-                            });
+                          onPressed: () async {
+                            final result = await confirmDelete(context);
+                            if (result) {
+                              setState(() {
+                                isDelete = !isDelete;
+                              });
+                              Future.delayed(const Duration(seconds: 1), () {
+                                widget.delete();
+                              });
+                            }
                           },
                           child: Icon(Icons.delete),
                         ),
@@ -127,5 +130,41 @@ class _CardItemWidgetState extends State<CardItemWidget> {
             ),
           ),
         ));
+  }
+
+  Future confirmDelete(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              title: Center(child: Text('Excluir')),
+              content: Text('Deseja excluir despesa fixa?'),
+              actions: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    FloatingActionButton(
+                      backgroundColor: Color(0xff00ff5f),
+                      child: Icon(
+                        Icons.check,
+                        color: Colors.black,
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context, true);
+                      },
+                    ),
+                    FloatingActionButton(
+                      backgroundColor: Colors.redAccent,
+                      child: Icon(
+                        Icons.exit_to_app,
+                        color: Colors.black,
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context, false);
+                      },
+                    ),
+                  ],
+                )
+              ],
+            ));
   }
 }
