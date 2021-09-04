@@ -14,6 +14,7 @@ Future<Database> getDatabase() async {
 Future<void> _createDatabase(db, version) async {
   List<String> queryes = [
     'CREATE TABLE $tableFixedExpenses ($idFixedExpense INTEGER PRIMARY KEY, $nameFixedExpense TEXT, $descriptionFixedExpense TEXT, $valueFixedExpense NUM, $monthFixedExpense TEXT, $payFixedExpense INT)',
+    'CREATE TABLE $tableVariableExpenses ($idVariableExpense INTEGER PRIMARY KEY, $nameVariableExpense TEXT, $descriptionVariableExpense TEXT, $valueVariableExpense NUM, $monthVariableExpense TEXT, $payVariableExpense INT)',
   ];
 
   for (String query in queryes) {

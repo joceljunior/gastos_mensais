@@ -136,7 +136,6 @@ class _CardItemWidgetState extends State<CardItemWidget> {
     return showDialog(
         context: context,
         builder: (context) => AlertDialog(
-              title: Center(child: Text('Excluir')),
               content: Text('Deseja excluir despesa fixa?'),
               actions: [
                 Row(

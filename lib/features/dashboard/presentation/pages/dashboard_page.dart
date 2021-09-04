@@ -96,7 +96,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     icon: Icons.money_off_csred_outlined,
                     text: 'Variaveis',
                     onClick: () {
-                      print('cliquei');
+                      Modular.to.pushNamed('/variable');
                     },
                   ),
                   ButtomWidget(

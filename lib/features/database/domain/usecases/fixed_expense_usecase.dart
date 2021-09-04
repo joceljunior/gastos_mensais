@@ -19,6 +19,7 @@ class FixedExpenseUseCase implements IFixedExpenseUseCase {
   final IFixedExpenseRepository repository =
       Modular.get<IFixedExpenseRepository>();
 
+  @override
   Future<Either<DatabaseError, double>> getFullValue() async {
     // regras de negocio
     return await repository.getFullValue();
