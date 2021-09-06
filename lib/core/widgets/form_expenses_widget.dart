@@ -112,7 +112,7 @@ class _FormExpensesState extends State<FormExpenses> {
 
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Text('Despesa Fixa gravada!'),
+                  content: Text('Despesa Fixa gerada!'),
                   backgroundColor: Colors.green,
                 ),
               );
