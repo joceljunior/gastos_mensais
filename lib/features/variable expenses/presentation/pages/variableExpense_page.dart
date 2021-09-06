@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gastos_mensais/core/widgets/form_expenses_widget.dart';
 
 class VariableExpensesPage extends StatefulWidget {
   const VariableExpensesPage({Key? key}) : super(key: key);
@@ -20,7 +21,7 @@ class _VariableExpensesPageState extends State<VariableExpensesPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Contas Varaiveis',
+                  'Contas Variaveis',
                   style: TextStyle(color: Colors.black),
                 ),
                 FloatingActionButton(
@@ -29,11 +30,23 @@ class _VariableExpensesPageState extends State<VariableExpensesPage> {
                       Icons.add,
                       color: Colors.white,
                     ),
-                    onPressed: () async {})
+                    onPressed: () async {
+                      await showFormFixedExpenses(context);
+
+                      setState(() {});
+                    })
               ],
             ),
           ),
         ),
         body: Container());
+  }
+
+  Future<bool?> showFormFixedExpenses(BuildContext context) async {
+    await showDialog<bool>(
+        context: context,
+        builder: (context) => FormExpenses(
+              isFixed: false,
+            ));
   }
 }

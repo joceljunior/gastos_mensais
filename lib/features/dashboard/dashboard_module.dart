@@ -7,16 +7,22 @@ import 'package:gastos_mensais/features/Dashboard/presentation/pages/dashboard_p
 import 'package:gastos_mensais/features/Fixed%20Expenses/FixedExpenses_module.dart';
 import 'package:gastos_mensais/features/dashboard/external/datasource/valueExpenses_datadource.dart';
 import 'package:gastos_mensais/features/database/data/datasource/fixed_expense_datasource.dart';
+import 'package:gastos_mensais/features/database/data/datasource/variable_expense_datasource.dart';
 import 'package:gastos_mensais/features/database/data/repositories/fixed_expense_repository.dart';
+import 'package:gastos_mensais/features/database/data/repositories/variable_expense_repository.dart';
 import 'package:gastos_mensais/features/database/domain/repositories/fixed_expenses_repository.dart';
+import 'package:gastos_mensais/features/database/domain/repositories/variable_expenses_repository.dart';
 import 'package:gastos_mensais/features/database/external/datasource/fixed_expense_datasource.dart';
+import 'package:gastos_mensais/features/database/external/datasource/variable_expense_datasource.dart';
 import 'package:gastos_mensais/features/variable%20expenses/variableExpenses_module.dart';
 
 class DashboardModule extends Module {
   @override
   List<Bind> get binds => [
         Bind<IFixedExpenseRepository>((i) => FixedExpenseRepository()),
+        Bind<IVariableExpensesRepository>((i) => VariableExpenseRepository()),
         Bind<IFixedExpenseDatasource>((i) => FixedExpenseDatasource()),
+        Bind<IVariableExpenseDatasource>((i) => VariableExpenseDatasource()),
         Bind<IValueExpensesDatasource>((i) => ValueExpensesDatasource()),
         Bind<IValueExpensesRepository>((i) => ValueExpensesRepository()),
         Bind<IValueExpensesUseCase>((i) => ValueExpensesUseCase()),
