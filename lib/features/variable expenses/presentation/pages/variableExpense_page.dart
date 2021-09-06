@@ -20,7 +20,7 @@ class _VariableExpensesPageState extends State<VariableExpensesPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Contas Fixas',
+                  'Contas Varaiveis',
                   style: TextStyle(color: Colors.black),
                 ),
                 FloatingActionButton(
