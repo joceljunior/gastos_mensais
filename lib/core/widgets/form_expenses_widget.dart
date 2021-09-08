@@ -59,6 +59,12 @@ class _FormExpensesState extends State<FormExpenses> {
                     validValue: () {},
                     keyboardType: TextInputType.number),
                 SizedBox(height: 20),
+                Visibility(
+                  visible: !widget.isFixed,
+                  child: DropdownButton(
+                    items: [],
+                  ),
+                )
               ],
             ),
           ),

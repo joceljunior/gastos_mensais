@@ -26,4 +26,36 @@ class VariableExpenseRepository implements IVariableExpensesRepository {
       return Left(RepositoryError(message: 'Erro no data'));
     }
   }
+
+  @override
+  Future<Either<DatabaseError, bool>> delete(int id) async {
+    try {
+      final result = await datasource.delete(id);
+      return Right(result);
+    } on RepositoryError {
+      return Left(RepositoryError(message: 'Erro no data'));
+    }
+  }
+
+  @override
+  Future<Either<DatabaseError, List<Map<String, dynamic>>>>
+      getListVariableExpense(String month) async {
+    try {
+      final result = await datasource.getListVariableExpense(month);
+      return Right(result);
+    } on RepositoryError {
+      return Left(RepositoryError(message: 'Erro no data'));
+    }
+  }
+
+  @override
+  Future<Either<DatabaseError, bool>> payExpense(
+      Map<String, dynamic> variable) async {
+    try {
+      final result = await datasource.payExpense(variable);
+      return Right(result);
+    } on RepositoryError {
+      return Left(RepositoryError(message: 'Erro no data'));
+    }
+  }
 }

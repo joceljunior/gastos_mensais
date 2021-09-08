@@ -33,4 +33,49 @@ class VariableExpenseDatasource implements IVariableExpenseDatasource {
       throw DatasourceError(message: 'Erro no Datasource');
     }
   }
+
+  @override
+  Future<bool> delete(int id) async {
+    try {
+      final Database db = await getDatabase();
+      await db.delete(tableVariableExpenses,
+          where: '$idVariableExpense = ?', whereArgs: [id]);
+      return true;
+    } catch (e) {
+      throw Exception();
+    }
+  }
+
+  @override
+  Future<List<Map<String, dynamic>>> getListVariableExpense(
+      String month) async {
+    try {
+      final Database db = await getDatabase();
+      List<Map<String, dynamic>> maps =
+          await db.query(tableVariableExpenses, columns: [
+        idVariableExpense,
+        nameVariableExpense,
+        descriptionVariableExpense,
+        valueVariableExpense,
+        monthVariableExpense,
+        payVariableExpense,
+      ]);
+
+      return maps;
+    } catch (e) {
+      throw Exception();
+    }
+  }
+
+  @override
+  Future<bool> payExpense(Map<String, dynamic> variable) async {
+    try {
+      final Database db = await getDatabase();
+      await db.update(tableVariableExpenses, variable,
+          where: '$idVariableExpense = ?', whereArgs: [variable['id']]);
+      return true;
+    } catch (e) {
+      throw Exception();
+    }
+  }
 }
