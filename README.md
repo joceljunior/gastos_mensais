@@ -12,18 +12,23 @@ Projeto CRUD para adicionar contas fixas e contas variaveis no mes, com visualiz
 </div>
 
 ## Desenvolvimento 
-- [x] Dashboard.
+- [] Dashboard.
   - [ ] Formatar Valor na Regra de Negocio. 
   - [ ] Atualizar o valor.
 - [ ] Modulo Contas Fixas.
   - [x] Excluir Despesa. 
-  - [ ] Desfazer pagamento.
-  - [ ] Ordenar por não pagas.
-  - [ ] Adicionar Pergunta de Confirmação.
-  - [ ] CircularProgress nas ações.
+  - [x] Desfazer pagamento.
+  - [] Ordenar por não pagas.
+  - [x] Adicionar Pergunta de Confirmação.
 - [ ] Validação formulario. 
-- [ ] Melhorar componetização.
+- [x] Melhorar componetização.
 - [ ] Modulo Contas Variaveis.
+  - [x] Operações banco de dados. 
+  - [] Excluir Despesa. 
+  - [] Desfazer pagamento.
+  - [] Ordenar por não pagas.
+  - [] Adicionar Pergunta de Confirmação.
+  - [] Filtro por mes
 - [ ] Pagamentos
 - [ ] Testes Unitários - TDD
 

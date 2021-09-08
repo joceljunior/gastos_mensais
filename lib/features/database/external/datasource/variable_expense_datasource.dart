@@ -38,8 +38,11 @@ class VariableExpenseDatasource implements IVariableExpenseDatasource {
   Future<bool> delete(int id) async {
     try {
       final Database db = await getDatabase();
-      await db.delete(tableVariableExpenses,
-          where: '$idVariableExpense = ?', whereArgs: [id]);
+      await db.delete(
+        tableVariableExpenses,
+        where: '$idVariableExpense = ?',
+        whereArgs: [id],
+      );
       return true;
     } catch (e) {
       throw Exception();
@@ -51,15 +54,19 @@ class VariableExpenseDatasource implements IVariableExpenseDatasource {
       String month) async {
     try {
       final Database db = await getDatabase();
-      List<Map<String, dynamic>> maps =
-          await db.query(tableVariableExpenses, columns: [
-        idVariableExpense,
-        nameVariableExpense,
-        descriptionVariableExpense,
-        valueVariableExpense,
-        monthVariableExpense,
-        payVariableExpense,
-      ]);
+      List<Map<String, dynamic>> maps = await db.query(
+        tableVariableExpenses,
+        columns: [
+          idVariableExpense,
+          nameVariableExpense,
+          descriptionVariableExpense,
+          valueVariableExpense,
+          monthVariableExpense,
+          payVariableExpense,
+        ],
+        where: '$monthVariableExpense = ?',
+        whereArgs: [month],
+      );
 
       return maps;
     } catch (e) {
