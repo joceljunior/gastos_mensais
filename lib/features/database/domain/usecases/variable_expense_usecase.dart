@@ -8,13 +8,13 @@ abstract class IVariableExpenseUsecase {
   Future<Either<DatabaseError, bool>> createVariableExpense(
       Map<String, dynamic> variable);
   Future<Either<DatabaseError, List<Map<String, dynamic>>>>
-      getListVariableExpense(String month);
+      getListVariableExpense(String? month);
   Future<Either<DatabaseError, bool>> payExpense(Map<String, dynamic> variable);
   Future<Either<DatabaseError, bool>> delete(int id);
 }
 
 class VariableExpenseUsecase implements IVariableExpenseUsecase {
-  final repository = Modular.get<IVariableExpensesRepository>();
+  final repository = Modular.get<IVariableExpenseRepository>();
   @override
   Future<Either<DatabaseError, bool>> createVariableExpense(
       Map<String, dynamic> variable) async {
@@ -33,7 +33,7 @@ class VariableExpenseUsecase implements IVariableExpenseUsecase {
 
   @override
   Future<Either<DatabaseError, List<Map<String, dynamic>>>>
-      getListVariableExpense(String month) async {
+      getListVariableExpense(String? month) async {
     return await repository.getListVariableExpense(month);
   }
 

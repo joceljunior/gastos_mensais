@@ -4,7 +4,7 @@ import 'package:gastos_mensais/features/database/data/datasource/variable_expens
 import 'package:gastos_mensais/features/database/domain/repositories/variable_expenses_repository.dart';
 import 'package:gastos_mensais/features/database/utils/database_errors.dart';
 
-class VariableExpenseRepository implements IVariableExpensesRepository {
+class VariableExpenseRepository implements IVariableExpenseRepository {
   final datasource = Modular.get<IVariableExpenseDatasource>();
   @override
   Future<Either<DatabaseError, bool>> createVariableExpense(
@@ -39,7 +39,7 @@ class VariableExpenseRepository implements IVariableExpensesRepository {
 
   @override
   Future<Either<DatabaseError, List<Map<String, dynamic>>>>
-      getListVariableExpense(String month) async {
+      getListVariableExpense(String? month) async {
     try {
       final result = await datasource.getListVariableExpense(month);
       return Right(result);

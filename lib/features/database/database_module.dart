@@ -17,7 +17,7 @@ class DashboardModule extends Module {
         Bind<IFixedExpenseDatasource>((i) => FixedExpenseDatasource()),
         Bind<IVariableExpenseDatasource>((i) => VariableExpenseDatasource()),
         Bind<IFixedExpenseRepository>((i) => FixedExpenseRepository()),
-        Bind<IVariableExpensesRepository>((i) => VariableExpenseRepository()),
+        Bind<IVariableExpenseRepository>((i) => VariableExpenseRepository()),
         Bind<IFixedExpenseUseCase>((i) => FixedExpenseUseCase()),
         Bind<IVariableExpenseUsecase>((i) => VariableExpenseUsecase()),
       ];

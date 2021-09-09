@@ -51,22 +51,39 @@ class VariableExpenseDatasource implements IVariableExpenseDatasource {
 
   @override
   Future<List<Map<String, dynamic>>> getListVariableExpense(
-      String month) async {
+      String? month) async {
     try {
+      List<Map<String, dynamic>> maps;
       final Database db = await getDatabase();
-      List<Map<String, dynamic>> maps = await db.query(
-        tableVariableExpenses,
-        columns: [
-          idVariableExpense,
-          nameVariableExpense,
-          descriptionVariableExpense,
-          valueVariableExpense,
-          monthVariableExpense,
-          payVariableExpense,
-        ],
-        where: '$monthVariableExpense = ?',
-        whereArgs: [month],
-      );
+      if (month != null) {
+        maps = await db.query(
+          tableVariableExpenses,
+          columns: [
+            idVariableExpense,
+            nameVariableExpense,
+            descriptionVariableExpense,
+            valueVariableExpense,
+            monthVariableExpense,
+            payVariableExpense,
+          ],
+          where: '$monthVariableExpense = ?',
+          whereArgs: [month],
+        );
+      } else {
+        maps = await db.query(
+          tableVariableExpenses,
+          columns: [
+            idVariableExpense,
+            nameVariableExpense,
+            descriptionVariableExpense,
+            valueVariableExpense,
+            monthVariableExpense,
+            payVariableExpense,
+          ],
+          where: '$monthVariableExpense = ?',
+          whereArgs: [month],
+        );
+      }
 
       return maps;
     } catch (e) {

@@ -20,7 +20,7 @@ class DashboardModule extends Module {
   @override
   List<Bind> get binds => [
         Bind<IFixedExpenseRepository>((i) => FixedExpenseRepository()),
-        Bind<IVariableExpensesRepository>((i) => VariableExpenseRepository()),
+        Bind<IVariableExpenseRepository>((i) => VariableExpenseRepository()),
         Bind<IFixedExpenseDatasource>((i) => FixedExpenseDatasource()),
         Bind<IVariableExpenseDatasource>((i) => VariableExpenseDatasource()),
         Bind<IValueExpensesDatasource>((i) => ValueExpensesDatasource()),

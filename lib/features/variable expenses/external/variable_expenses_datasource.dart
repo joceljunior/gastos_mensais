@@ -3,8 +3,8 @@ import 'package:gastos_mensais/features/database/domain/repositories/variable_ex
 import 'package:gastos_mensais/features/variable%20expenses/data/datasource/variable_expenses_datasource.dart';
 
 class VariableExpensesDatasource implements IVariableExpensesDatasource {
-  final IVariableExpensesRepository tableVariableExpenses =
-      Modular.get<IVariableExpensesRepository>();
+  final IVariableExpenseRepository tableVariableExpenses =
+      Modular.get<IVariableExpenseRepository>();
   @override
   Future<bool> createVariableExpense(Map<String, dynamic> variable) async {
     return await tableVariableExpenses

@@ -6,8 +6,8 @@ import 'package:gastos_mensais/features/database/domain/repositories/variable_ex
 class ValueExpensesDatasource implements IValueExpensesDatasource {
   final IFixedExpenseRepository tableFixedExpenses =
       Modular.get<IFixedExpenseRepository>();
-  final IVariableExpensesRepository tableVariableExpenses =
-      Modular.get<IVariableExpensesRepository>();
+  final IVariableExpenseRepository tableVariableExpenses =
+      Modular.get<IVariableExpenseRepository>();
   @override
   Future<double> call() async {
     var fixed = await tableFixedExpenses
